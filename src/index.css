@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    font-feature-settings: "ss01", "cv11", "cv05";
+    -webkit-font-smoothing: antialiased;
+    background-color: #000;
+    color: #fff;
+  }
+  :root {
+    color-scheme: dark;
+  }
+  *::selection {
+    background: #fff;
+    color: #000;
+  }
+  /* Scrollbar — monochrome */
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  *::-webkit-scrollbar-track {
+    background: #0a0a0a;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: #262626;
+    border-radius: 4px;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background: #3a3a3a;
+  }
+}
+
+@layer components {
+  .input-base {
+    @apply w-full bg-char border border-border text-white placeholder:text-subtle
+      rounded px-3 py-2 text-sm font-sans
+      focus:outline-none focus:border-white focus:ring-1 focus:ring-white
+      disabled:opacity-50 disabled:cursor-not-allowed transition;
+  }
+  .btn-base {
+    @apply inline-flex items-center justify-center gap-2 rounded px-3.5 py-2 text-sm font-medium
+      transition focus:outline-none focus-visible:ring-2 focus-visible:ring-white
+      disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply btn-base bg-white text-ink hover:bg-divider active:bg-divider;
+  }
+  .btn-secondary {
+    @apply btn-base bg-surface text-white border border-border hover:border-secondary hover:bg-slate;
+  }
+  .btn-ghost {
+    @apply btn-base text-secondary hover:text-white hover:bg-slate;
+  }
+  .btn-danger {
+    @apply btn-base bg-surface text-white border border-muted hover:border-white;
+  }
+  .card {
+    @apply bg-char border border-border rounded-lg;
+  }
+  .card-padded {
+    @apply card p-4 sm:p-5;
+  }
+  .label {
+    @apply block text-xs uppercase tracking-wider text-secondary mb-1.5 font-medium;
+  }
+  .table-base {
+    @apply w-full text-sm;
+  }
+  .table-base th {
+    @apply text-left text-xs uppercase tracking-wider text-secondary font-medium
+      px-3 py-2 border-b border-border bg-slate;
+  }
+  .table-base td {
+    @apply px-3 py-2.5 border-b border-border text-white;
+  }
+  .table-base tbody tr:hover td {
+    @apply bg-slate;
+  }
+  .kbd {
+    @apply inline-flex items-center justify-center min-w-[1.5rem] px-1.5 py-0.5 rounded
+      bg-slate border border-border text-[10px] uppercase tracking-wide text-secondary font-mono;
+  }
+  .pill {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface border border-border
+      text-xs text-secondary;
+  }
+  .pill-on {
+    @apply pill bg-white text-ink border-white;
+  }
+}
