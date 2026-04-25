@@ -50,9 +50,9 @@ export function Login() {
             <Gamepad2 size={18} />
           </div>
           <div>
-            <div className="text-base font-semibold tracking-tight">StoreFin</div>
+            <div className="text-base font-semibold tracking-tight">TPFTVG</div>
             <div className="text-[10px] uppercase tracking-wider text-secondary">
-              Gaming Shop Tracker
+              Financial Tracker
             </div>
           </div>
         </div>

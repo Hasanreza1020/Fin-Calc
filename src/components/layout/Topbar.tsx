@@ -1,13 +1,15 @@
 import { useState } from "react";
-import { Menu, LogOut, Plus } from "lucide-react";
+import { Menu, LogOut, Plus, Sun, Moon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/lib/auth";
+import { useTheme } from "@/lib/theme";
 import { Button } from "@/components/ui/Button";
 
 type Props = { onOpenSidebar: () => void };
 
 export function Topbar({ onOpenSidebar }: Props) {
-  const { profile, signOut } = useAuth();
+  const { profile, signOut, isDemo } = useAuth();
+  const { theme, toggle } = useTheme();
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -22,6 +24,12 @@ export function Topbar({ onOpenSidebar }: Props) {
       </button>
 
       <div className="flex-1" />
+
+      {isDemo && (
+        <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded border border-white text-[10px] uppercase tracking-wider text-white">
+          Demo mode
+        </span>
+      )}
 
       <div className="hidden sm:flex items-center gap-2">
         <Button
@@ -39,6 +47,15 @@ export function Topbar({ onOpenSidebar }: Props) {
           <Plus size={14} /> New purchase
         </Button>
       </div>
+
+      <button
+        onClick={toggle}
+        className="text-secondary hover:text-white p-2 rounded hover:bg-slate transition"
+        aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
+        title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+      >
+        {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+      </button>
 
       <div className="relative">
         <button

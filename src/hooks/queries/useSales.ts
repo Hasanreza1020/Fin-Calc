@@ -10,6 +10,7 @@ export type SaleWithItems = Sale & {
   items: (Database["public"]["Tables"]["sale_items"]["Row"] & {
     product: { id: string; name: string; sku: string | null } | null;
   })[];
+  customer: { id: string; name: string; phone: string | null } | null;
 };
 
 export function useSales(opts?: { from?: Date; to?: Date; limit?: number }) {
@@ -19,7 +20,7 @@ export function useSales(opts?: { from?: Date; to?: Date; limit?: number }) {
       let q = supabase
         .from("sales")
         .select(
-          "*, items:sale_items(*, product:products(id,name,sku))"
+          "*, items:sale_items(*, product:products(id,name,sku)), customer:customers(id,name,phone)"
         )
         .order("sale_date", { ascending: false });
       if (opts?.from) q = q.gte("sale_date", opts.from.toISOString());
@@ -58,6 +59,7 @@ export function useCreateSale() {
       qc.invalidateQueries({ queryKey: ["inventory_units"] });
       qc.invalidateQueries({ queryKey: ["dashboard"] });
       qc.invalidateQueries({ queryKey: ["reports"] });
+      qc.invalidateQueries({ queryKey: ["customers"] });
     },
   });
 }
@@ -75,6 +77,7 @@ export function useDeleteSale() {
       qc.invalidateQueries({ queryKey: ["inventory_units"] });
       qc.invalidateQueries({ queryKey: ["dashboard"] });
       qc.invalidateQueries({ queryKey: ["reports"] });
+      qc.invalidateQueries({ queryKey: ["customers"] });
     },
   });
 }

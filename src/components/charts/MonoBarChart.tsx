@@ -8,7 +8,7 @@ import {
   YAxis,
   Legend,
 } from "recharts";
-import { MONO, SERIES } from "./palette";
+import { useMono, useSeries } from "./palette";
 
 type Series = { key: string; label: string };
 
@@ -29,6 +29,8 @@ export function MonoBarChart<T extends Record<string, unknown>>({
   layout = "horizontal",
   yFormatter,
 }: Props<T>) {
+  const MONO = useMono();
+  const SERIES = useSeries();
   const isVertical = layout === "vertical";
   return (
     <ResponsiveContainer width="100%" height={height}>

@@ -8,7 +8,7 @@ import {
   YAxis,
   Legend,
 } from "recharts";
-import { MONO, SERIES } from "./palette";
+import { useMono, useSeries } from "./palette";
 
 type Series = { key: string; label: string; dashed?: boolean };
 
@@ -27,6 +27,8 @@ export function MonoLineChart<T extends Record<string, unknown>>({
   height = 280,
   yFormatter,
 }: Props<T>) {
+  const MONO = useMono();
+  const SERIES = useSeries();
   return (
     <ResponsiveContainer width="100%" height={height}>
       <LineChart

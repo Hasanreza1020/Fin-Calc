@@ -8,6 +8,7 @@ import { Select } from "@/components/ui/Select";
 import { Button } from "@/components/ui/Button";
 import { ProductPicker } from "@/components/forms/ProductPicker";
 import { UnitPicker } from "@/components/forms/UnitPicker";
+import { CustomerPicker } from "@/components/forms/CustomerPicker";
 import { useProducts } from "@/hooks/queries/useProducts";
 import { useCreateSale } from "@/hooks/queries/useSales";
 import { useToast } from "@/components/ui/Toast";
@@ -39,7 +40,9 @@ export function SaleNew() {
   const create = useCreateSale();
   const { push } = useToast();
 
-  const [customer, setCustomer] = useState("");
+  const [customer, setCustomer] = useState<{ id: string; name: string } | null>(
+    null
+  );
   const [payment, setPayment] = useState<PaymentMethod>("cash");
   const [notes, setNotes] = useState("");
   const [lines, setLines] = useState<Line[]>([empty()]);
@@ -95,7 +98,8 @@ export function SaleNew() {
     try {
       await create.mutateAsync({
         sale: {
-          customer_name: customer.trim() || null,
+          customer_id: customer?.id ?? null,
+          customer_name: customer?.name ?? null,
           payment_method: payment,
           notes: notes.trim() || null,
         },
@@ -122,12 +126,7 @@ export function SaleNew() {
         <div className="lg:col-span-2 space-y-4">
           <Card title="Header">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <Input
-                label="Customer (optional)"
-                value={customer}
-                onChange={(e) => setCustomer(e.target.value)}
-                placeholder="Walk-in"
-              />
+              <CustomerPicker value={customer} onChange={setCustomer} />
               <Select
                 label="Payment"
                 value={payment}

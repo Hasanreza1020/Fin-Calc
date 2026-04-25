@@ -160,6 +160,7 @@ export interface Database {
         Row: {
           id: string;
           customer_name: string | null;
+          customer_id: string | null;
           sale_date: string;
           total_amount: number;
           payment_method: PaymentMethod;
@@ -170,6 +171,7 @@ export interface Database {
         Insert: {
           id?: string;
           customer_name?: string | null;
+          customer_id?: string | null;
           sale_date?: string;
           total_amount?: number;
           payment_method?: PaymentMethod;
@@ -178,6 +180,35 @@ export interface Database {
           created_at?: string;
         };
         Update: Partial<Database["public"]["Tables"]["sales"]["Insert"]>;
+      };
+      customers: {
+        Row: {
+          id: string;
+          name: string;
+          phone: string | null;
+          email: string | null;
+          address: string | null;
+          notes: string | null;
+          total_spent: number;
+          order_count: number;
+          last_order_at: string | null;
+          created_by: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          name: string;
+          phone?: string | null;
+          email?: string | null;
+          address?: string | null;
+          notes?: string | null;
+          total_spent?: number;
+          order_count?: number;
+          last_order_at?: string | null;
+          created_by?: string | null;
+          created_at?: string;
+        };
+        Update: Partial<Database["public"]["Tables"]["customers"]["Insert"]>;
       };
       sale_items: {
         Row: {

@@ -10,6 +10,7 @@ import {
   Users,
   Settings,
   Gamepad2,
+  Contact,
 } from "lucide-react";
 import { useAuth } from "@/lib/auth";
 
@@ -17,6 +18,7 @@ const NAV = [
   { to: "/", label: "Dashboard", icon: LayoutDashboard, end: true },
   { to: "/sales", label: "Sales", icon: ShoppingCart },
   { to: "/purchases", label: "Purchases", icon: PackagePlus },
+  { to: "/customers", label: "Customers", icon: Contact },
   { to: "/products", label: "Products", icon: Package },
   { to: "/inventory", label: "Inventory", icon: Boxes },
   { to: "/expenses", label: "Cash flow", icon: Receipt },
@@ -40,9 +42,9 @@ export function Sidebar({ onNavigate }: Props) {
           <Gamepad2 size={16} />
         </div>
         <div>
-          <div className="text-sm font-semibold tracking-tight">StoreFin</div>
+          <div className="text-sm font-semibold tracking-tight">TPFTVG</div>
           <div className="text-[10px] uppercase tracking-wider text-secondary">
-            Gaming Shop
+            Financial Tracker
           </div>
         </div>
       </div>

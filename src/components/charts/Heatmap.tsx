@@ -1,3 +1,5 @@
+import { useMono } from "./palette";
+
 type Cell = { row: number; col: number; value: number };
 
 type Props = {
@@ -7,14 +9,26 @@ type Props = {
   formatter?: (v: number) => string;
 };
 
+function hexToRgb(h: string): [number, number, number] {
+  const s = h.replace("#", "");
+  const v = parseInt(s.length === 3 ? s.split("").map((c) => c + c).join("") : s, 16);
+  return [(v >> 16) & 255, (v >> 8) & 255, v & 255];
+}
+
+function lerp(a: number, b: number, t: number) {
+  return Math.round(a + (b - a) * t);
+}
+
 export function Heatmap({ cells, rowLabels, colLabels, formatter }: Props) {
+  const MONO = useMono();
   const max = cells.reduce((m, c) => Math.max(m, c.value), 0) || 1;
+  const [br, bg, bb] = hexToRgb(MONO.bg);
+  const [fr, fg, fb] = hexToRgb(MONO.fg);
 
   function shade(value: number) {
-    if (value <= 0) return "#0a0a0a";
-    const t = Math.min(1, value / max);
-    const lum = Math.round(20 + t * 200);
-    return `rgb(${lum},${lum},${lum})`;
+    if (value <= 0) return MONO.bg;
+    const t = Math.min(1, value / max) * 0.85 + 0.05;
+    return `rgb(${lerp(br, fr, t)},${lerp(bg, fg, t)},${lerp(bb, fb, t)})`;
   }
 
   const grid: number[][] = rowLabels.map(() =>

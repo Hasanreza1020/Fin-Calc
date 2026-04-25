@@ -2,6 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Theme palettes — tokens are semantic. "ink" = primary background, */
+/* "white" = primary text. Variables flip when html.light is set. */
+:root,
+html.dark {
+  --c-ink: #000000;
+  --c-char: #0a0a0a;
+  --c-slate: #141414;
+  --c-surface: #1a1a1a;
+  --c-border: #262626;
+  --c-muted: #3a3a3a;
+  --c-subtle: #5a5a5a;
+  --c-secondary: #8a8a8a;
+  --c-divider: #cccccc;
+  --c-paper: #f5f5f5;
+  --c-white: #ffffff;
+  --scroll-track: #0a0a0a;
+  --scroll-thumb: #262626;
+  --scroll-thumb-hover: #3a3a3a;
+}
+
+html.light {
+  --c-ink: #ffffff;
+  --c-char: #f7f7f7;
+  --c-slate: #ededed;
+  --c-surface: #e4e4e4;
+  --c-border: #d4d4d4;
+  --c-muted: #b0b0b0;
+  --c-subtle: #888888;
+  --c-secondary: #555555;
+  --c-divider: #2a2a2a;
+  --c-paper: #0a0a0a;
+  --c-white: #000000;
+  --scroll-track: #f0f0f0;
+  --scroll-thumb: #c4c4c4;
+  --scroll-thumb-hover: #a0a0a0;
+}
+
 @layer base {
   html,
   body,
@@ -11,30 +48,26 @@
   body {
     font-feature-settings: "ss01", "cv11", "cv05";
     -webkit-font-smoothing: antialiased;
-    background-color: #000;
-    color: #fff;
-  }
-  :root {
-    color-scheme: dark;
+    background-color: var(--c-ink);
+    color: var(--c-white);
   }
   *::selection {
-    background: #fff;
-    color: #000;
+    background: var(--c-white);
+    color: var(--c-ink);
   }
-  /* Scrollbar — monochrome */
   *::-webkit-scrollbar {
     width: 10px;
     height: 10px;
   }
   *::-webkit-scrollbar-track {
-    background: #0a0a0a;
+    background: var(--scroll-track);
   }
   *::-webkit-scrollbar-thumb {
-    background: #262626;
+    background: var(--scroll-thumb);
     border-radius: 4px;
   }
   *::-webkit-scrollbar-thumb:hover {
-    background: #3a3a3a;
+    background: var(--scroll-thumb-hover);
   }
 }
 

@@ -76,9 +76,9 @@ export function Settings() {
 
       <Card title="About" className="mt-4">
         <p className="text-sm text-secondary leading-relaxed">
-          StoreFin v0.1 — a private cashflow & inventory tracker for your
-          gaming shop. Data is stored in your Supabase project. Backups: enable
-          Supabase point-in-time recovery in your project for automatic
+          TPFTVG Financial Tracker v0.1 — a private cashflow & inventory tracker
+          for your gaming shop. Data is stored in your Supabase project. Backups:
+          enable Supabase point-in-time recovery in your project for automatic
           backups.
         </p>
       </Card>

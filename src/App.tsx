@@ -9,6 +9,7 @@ import { Sales } from "@/pages/Sales";
 import { SaleNew } from "@/pages/SaleNew";
 import { Purchases } from "@/pages/Purchases";
 import { PurchaseNew } from "@/pages/PurchaseNew";
+import { Customers } from "@/pages/Customers";
 import { Products } from "@/pages/Products";
 import { ProductDetail } from "@/pages/ProductDetail";
 import { Inventory } from "@/pages/Inventory";
@@ -35,6 +36,7 @@ export default function App() {
         <Route path="/sales/new" element={<Protected><SaleNew /></Protected>} />
         <Route path="/purchases" element={<Protected><Purchases /></Protected>} />
         <Route path="/purchases/new" element={<Protected><PurchaseNew /></Protected>} />
+        <Route path="/customers" element={<Protected><Customers /></Protected>} />
         <Route path="/products" element={<Protected><Products /></Protected>} />
         <Route path="/products/:id" element={<Protected><ProductDetail /></Protected>} />
         <Route path="/inventory" element={<Protected><Inventory /></Protected>} />

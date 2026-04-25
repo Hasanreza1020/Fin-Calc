@@ -103,7 +103,12 @@ export function Sales() {
                     )}
                     <div className="flex-1 min-w-0">
                       <div className="text-sm text-white truncate">
-                        {s.customer_name || "Walk-in"}
+                        {s.customer?.name || s.customer_name || "Walk-in"}
+                        {s.customer?.phone && (
+                          <span className="text-secondary text-xs font-normal ml-2">
+                            · {s.customer.phone}
+                          </span>
+                        )}
                       </div>
                       <div className="text-xs text-secondary">
                         {fmtDateTime(s.sale_date)} ·{" "}

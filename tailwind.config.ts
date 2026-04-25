@@ -6,17 +6,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: "#000000",
-        char: "#0a0a0a",
-        slate: "#141414",
-        surface: "#1a1a1a",
-        border: "#262626",
-        muted: "#3a3a3a",
-        subtle: "#5a5a5a",
-        secondary: "#8a8a8a",
-        divider: "#cccccc",
-        paper: "#f5f5f5",
-        white: "#ffffff",
+        ink: "var(--c-ink)",
+        char: "var(--c-char)",
+        slate: "var(--c-slate)",
+        surface: "var(--c-surface)",
+        border: "var(--c-border)",
+        muted: "var(--c-muted)",
+        subtle: "var(--c-subtle)",
+        secondary: "var(--c-secondary)",
+        divider: "var(--c-divider)",
+        paper: "var(--c-paper)",
+        white: "var(--c-white)",
       },
       fontFamily: {
         sans: [
@@ -40,7 +40,7 @@ export default {
       },
       boxShadow: {
         soft: "0 1px 0 0 rgba(255,255,255,0.04) inset, 0 0 0 1px rgba(255,255,255,0.06)",
-        focus: "0 0 0 2px rgba(255,255,255,0.85)",
+        focus: "0 0 0 2px var(--c-white)",
       },
       borderRadius: {
         DEFAULT: "6px",
