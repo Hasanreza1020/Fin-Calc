@@ -1,28 +1,21 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
-const url = import.meta.env.VITE_SUPABASE_URL;
-const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+// Supabase URL + publishable key are safe to ship in client code — the
+// "secret" credential is the service_role key, which is never used here.
+// Row-Level Security on the database is the actual access boundary.
+// Env vars override these defaults if set at build time.
+const DEFAULT_URL = "https://mpwxznlvfwotqgasnftg.supabase.co";
+const DEFAULT_KEY = "sb_publishable_pnGOX0WWnLrrvfK73TUsWQ_QCBesVK9";
+
+const url = import.meta.env.VITE_SUPABASE_URL || DEFAULT_URL;
+const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || DEFAULT_KEY;
 
 export const hasSupabaseEnv = Boolean(url && anonKey);
 
-if (!hasSupabaseEnv) {
-  // eslint-disable-next-line no-console
-  console.warn(
-    "Supabase env not set. Copy .env.example to .env and fill VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY."
-  );
-}
-
-// Supabase v2 throws synchronously inside createClient() if the URL is empty,
-// which would crash the whole app before React mounts. When env is missing
-// we feed a syntactically-valid placeholder so the app still boots into Login;
-// any real network call would fail, but auth gates the rest of the app.
-const safeUrl = hasSupabaseEnv ? url : "https://placeholder.supabase.co";
-const safeKey = hasSupabaseEnv ? anonKey : "placeholder-anon-key";
-
-export const supabase: SupabaseClient = createClient(safeUrl, safeKey, {
+export const supabase: SupabaseClient = createClient(url, anonKey, {
   auth: {
-    persistSession: hasSupabaseEnv,
-    autoRefreshToken: hasSupabaseEnv,
-    detectSessionInUrl: hasSupabaseEnv,
+    persistSession: true,
+    autoRefreshToken: true,
+    detectSessionInUrl: true,
   },
 });
